@@ -78,17 +78,22 @@ public class UserRegistrationProgram {
 		//scanning an storing the user value
 		String lastName = scan.next();
 		
+		//ask to user input
 		System.out.println("Enter the Email ID ");
 		String emailId = scan.next();
 		
+		//ask to user input
+		System.out.println("Enter Mobile Number : ");
+		String mobileNumber = scan.next();
+		
 		//passing the value in side the validateDatails
-		userRegistrationProgram.validateDetails(firstName, lastName , emailId);
+		userRegistrationProgram.validateDetails(firstName, lastName , emailId, mobileNumber);
 	
 	}
 	
 	
 	
-	public void validateDetails(String firstName,String lastName,String emailId) {
+	public void validateDetails(String firstName,String lastName,String emailId,String mobileNumber) {
 		//check The condition to first name is valid or not
 		if (userRegistrationProgram.checkFirstName(firstName)) {
 			
@@ -118,10 +123,44 @@ public class UserRegistrationProgram {
 		}else {
 					
 			System.out.println("User Email ID is not Valid");
-		}		
+		}
+		
+		//check The condition to mobile number is valid or not
+		if (userRegistrationProgram.checkMobileNumber(mobileNumber)) {
+			
+			System.out.println("User Mobile Number is Valid ");
+					
+		}else {
+					
+			System.out.println("User Mobile Number is not Valid");
+		}
+		
+		
+		
 	}
 	
 	
+
+	private boolean checkMobileNumber(String mobileNumber) {
+		//regular expression for mobile number
+		String regex = "(0|91)?[7-9][0-9]{9}";
+		
+		//compile regular expression
+		Pattern pattern = Pattern.compile(regex);
+		
+		//if condition to check mobile Number is null or not 
+		if(mobileNumber == null) {
+			
+			return false;
+		}
+		
+		Matcher matcher = pattern.matcher(mobileNumber);
+		
+		return matcher.matches();
+		
+	}
+
+
 
 	public static void main(String[] args) {
 		
@@ -142,9 +181,12 @@ Enter the last Name
 Def
 Enter the Email ID 
 abcdef@gmail.com
+Enter the Mobile Number :
+91 9919819801
 User first Name is Valid 
 User last Name is Valid 
 User last Name is Valid
+User Mobile Number is Valid 
 
  */
  

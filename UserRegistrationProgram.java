@@ -3,6 +3,11 @@ package com.bl.regex;
 import java.util.Scanner;
 import java.util.regex.*;
 
+/*
+As a User need to follow pre-defined Password rules.
+Rule1 – minimum 8 Characters
+Rule2 – Should have at least 1 Upper Case
+*/
 
 public class UserRegistrationProgram {
 	
@@ -174,7 +179,7 @@ public class UserRegistrationProgram {
 	public boolean checkPassword(String password){
 		
 		//regular expression for Password
-        String regex = "[A-Za-z0-9!@#&()–{}:;',?/*~$^+=<>]{8,}";
+        String regex = "(?=.*[A-Z])[A-Za-z0-9!@#&()–{}:;',?/*~$^+=<>]{8,}";
 
         //compile regular expression
         Pattern p = Pattern.compile(regex);
@@ -213,7 +218,7 @@ abcdef@gmail.com
 Enter the Mobile Number :
 91 9919819801
 Enter Password : 
-adj&ksssf9
+Abi*sdlk9&&
 User first Name is Valid 
 User last Name is Valid 
 User last Name is Valid

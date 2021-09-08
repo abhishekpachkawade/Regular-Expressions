@@ -86,14 +86,18 @@ public class UserRegistrationProgram {
 		System.out.println("Enter Mobile Number : ");
 		String mobileNumber = scan.next();
 		
+		//ask to user input
+		System.out.println("Enter Password : ");
+		String password = scan.next();
+		
 		//passing the value in side the validateDatails
-		userRegistrationProgram.validateDetails(firstName, lastName , emailId, mobileNumber);
+		userRegistrationProgram.validateDetails(firstName, lastName , emailId, mobileNumber,password);
 	
 	}
 	
 	
 	
-	public void validateDetails(String firstName,String lastName,String emailId,String mobileNumber) {
+	public void validateDetails(String firstName,String lastName,String emailId,String mobileNumber,String password) {
 		//check The condition to first name is valid or not
 		if (userRegistrationProgram.checkFirstName(firstName)) {
 			
@@ -135,7 +139,14 @@ public class UserRegistrationProgram {
 			System.out.println("User Mobile Number is not Valid");
 		}
 		
-		
+		//check The condition to password is valid or not
+        if(userRegistrationProgram.checkPassword(password)) {
+        	
+            System.out.println("Valid Password");   
+        }else {
+        	
+            System.out.println("Invalid Password");
+		}
 		
 	}
 	
@@ -159,6 +170,24 @@ public class UserRegistrationProgram {
 		return matcher.matches();
 		
 	}
+	
+	public boolean checkPassword(String password){
+		
+		//regular expression for Password
+        String regex = "[A-Za-z0-9!@#&()–{}:;',?/*~$^+=<>]{8,}";
+
+        //compile regular expression
+        Pattern p = Pattern.compile(regex);
+
+        //if condition to check Password is null or not 
+        if (password == null) {
+            return false;
+        }
+
+        Matcher m = p.matcher(password);
+
+        return m.matches();
+    }
 
 
 
@@ -183,10 +212,12 @@ Enter the Email ID
 abcdef@gmail.com
 Enter the Mobile Number :
 91 9919819801
+Enter Password : 
+adj&ksssf9
 User first Name is Valid 
 User last Name is Valid 
 User last Name is Valid
 User Mobile Number is Valid 
-
+Valid Password
  */
  

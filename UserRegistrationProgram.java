@@ -8,6 +8,7 @@ As a User need to follow pre-defined Password rules.
 Rule1 – minimum 8 Characters
 Rule2 – Should have at least 1 Upper Case
 Rule3 – Should have at least 1 numeric number in the password
+Rule4 – Has exactly 1 Special Character
 */
 
 public class UserRegistrationProgram {
@@ -180,7 +181,7 @@ public class UserRegistrationProgram {
 	public boolean checkPassword(String password){
 		
 		//regular expression for Password
-        String regex = "(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9!@#&()–{}:;',?/*~$^+=<>]{8,}$";
+        String regex = "^(?=.*[0-9])\" + \"(?=.*[a-z])(?=.*[A-Z])\" + \"(?=.*[@#$%^&+=])\" + \"(?=\\\\S+$).{8,}$";
 
         //compile regular expression
         Pattern p = Pattern.compile(regex);
@@ -219,7 +220,7 @@ abcdef@gmail.com
 Enter the Mobile Number :
 91 9919819801
 Enter Password : 
-Abdfdh@gv7
+Cshj&9938
 User first Name is Valid 
 User last Name is Valid 
 User last Name is Valid

@@ -1,25 +1,13 @@
-package com.bl.regex;
+package com.bl.junit;
 
-import java.util.Scanner;
-import java.util.regex.*;
-
-/*
-As a User need to follow pre-defined Password rules.
-Rule1 – minimum 8 Characters
-Rule2 – Should have at least 1 Upper Case
-Rule3 – Should have at least 1 numeric number in the password
-Rule4 – Has exactly 1 Special Character
-*/
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserRegistrationProgram {
 	
-	static UserRegistrationProgram userRegistrationProgram = new UserRegistrationProgram();
-
-	//method Check whether first name entered is valid or not it should start with cap and end with last name
-	//should have minimum 3 char and also add email id   
-	private boolean checkFirstName(String firstName) {
+	boolean checkFirstName(String firstName) {
 		//first letter should be cap and should have min 3 letters
-		String regex = "[A-Z]{1}[A-Za-z]{2}$";
+		String regex = "[A-Z]{1}[A-Za-z]{2,}$";
 		
 		//Compile regular expression
 		Pattern pattern = Pattern.compile(regex);
@@ -33,9 +21,7 @@ public class UserRegistrationProgram {
 	        return m.matches();
 	}
 	
-	
-	
-	public boolean checkLastName(String lastName) {
+	boolean checkLastName(String lastName) {
 		//lastName letter should be cap and should have min 3 letters
 		String regex= "^[A-Z][a-z]{2,}";
 		
@@ -54,9 +40,9 @@ public class UserRegistrationProgram {
 	}
 	
 	
-	public boolean checkEmailId(String emailId) {
+	 boolean checkEmailId(String emailId) {
 		//regular expression for email Id
-		String regex = "^[A-Z0-9a-z+_.]+@[a-zA-Z.-]+$";
+		String regex = "^[a-zA-Z0-9+_.]+@[a-zA-Z.-]+$";
 		
 		//compile regular expression
 		Pattern pattern = Pattern.compile(regex);
@@ -72,159 +58,44 @@ public class UserRegistrationProgram {
 		return matcher.matches();
 	}
 	
-	public void userInput() {
-		Scanner scan = new Scanner(System.in);
-		
-		//ask to user input
-		System.out.println("Enter the first name");
-		//scanning an storing the user value
-		String firstName = scan.next();
-		
-		//ask to user input
-		System.out.println("Enter the last Name");
-		//scanning an storing the user value
-		String lastName = scan.next();
-		
-		//ask to user input
-		System.out.println("Enter the Email ID ");
-		String emailId = scan.next();
-		
-		//ask to user input
-		System.out.println("Enter Mobile Number : ");
-		String mobileNumber = scan.next();
-		
-		//ask to user input
-		System.out.println("Enter Password : ");
-		String password = scan.next();
-		
-		//passing the value in side the validateDatails
-		userRegistrationProgram.validateDetails(firstName, lastName , emailId, mobileNumber,password);
-	
-	}
-	
-	
-	
-	public void validateDetails(String firstName,String lastName,String emailId,String mobileNumber,String password) {
-		//check The condition to first name is valid or not
-		if (userRegistrationProgram.checkFirstName(firstName)) {
+	 
+	 boolean checkMobileNumber(String mobileNumber) {
+			//regular expression for mobile number
+			String regex = "(0|91)?[7-9][0-9]{9}";
 			
-			System.out.println("User first Name is Valid ");
+			//compile regular expression
+			Pattern pattern = Pattern.compile(regex);
 			
-		}else {
+			//if condition to check mobile Number is null or not 
+			if(mobileNumber == null) {
+				
+				return false;
+			}
 			
-			System.out.println("User first name is not Valid");
+			Matcher matcher = pattern.matcher(mobileNumber);
+			
+			return matcher.matches();
+			
 		}
 		
-		
-		//check The condition to last name is valid or not
-		if (userRegistrationProgram.checkFirstName(lastName)) {
+		boolean checkPassword(String password){
 			
-			System.out.println("User last Name is Valid ");
-			
-		}else {
-			
-			System.out.println("User last name is not Valid");
-		}
-		
-		//check The condition to email Id is valid or not
-		if (userRegistrationProgram.checkEmailId(emailId)) {
-					
-			System.out.println("User Enail ID is Valid ");
-					
-		}else {
-					
-			System.out.println("User Email ID is not Valid");
-		}
-		
-		//check The condition to mobile number is valid or not
-		if (userRegistrationProgram.checkMobileNumber(mobileNumber)) {
-			
-			System.out.println("User Mobile Number is Valid ");
-					
-		}else {
-					
-			System.out.println("User Mobile Number is not Valid");
-		}
-		
-		//check The condition to password is valid or not
-        if(userRegistrationProgram.checkPassword(password)) {
-        	
-            System.out.println("Valid Password");   
-        }else {
-        	
-            System.out.println("Invalid Password");
-		}
-		
-	}
+			//regular expression for Password
+	        String regex = "^(?=.*[0-9])\" + \"(?=.*[a-z])(?=.*[A-Z])\" + \"(?=.*[@#$%^&+=])\" + \"(?=\\\\S+$).{8,}$";
+
+	        //compile regular expression
+	        Pattern p = Pattern.compile(regex);
+
+	        //if condition to check Password is null or not 
+	        if (password == null) {
+	            return false;
+	        }
+
+	        Matcher m = p.matcher(password);
+
+	        return m.matches();
+	    }
+
+
 	
-	
-
-	private boolean checkMobileNumber(String mobileNumber) {
-		//regular expression for mobile number
-		String regex = "(0|91)?[7-9][0-9]{9}";
-		
-		//compile regular expression
-		Pattern pattern = Pattern.compile(regex);
-		
-		//if condition to check mobile Number is null or not 
-		if(mobileNumber == null) {
-			
-			return false;
-		}
-		
-		Matcher matcher = pattern.matcher(mobileNumber);
-		
-		return matcher.matches();
-		
-	}
-	
-	public boolean checkPassword(String password){
-		
-		//regular expression for Password
-        String regex = "^(?=.*[0-9])\" + \"(?=.*[a-z])(?=.*[A-Z])\" + \"(?=.*[@#$%^&+=])\" + \"(?=\\\\S+$).{8,}$";
-
-        //compile regular expression
-        Pattern p = Pattern.compile(regex);
-
-        //if condition to check Password is null or not 
-        if (password == null) {
-            return false;
-        }
-
-        Matcher m = p.matcher(password);
-
-        return m.matches();
-    }
-
-
-
-	public static void main(String[] args) {
-		
-		//calling method userInput
-		userRegistrationProgram.userInput();	
-
-	}
-
 }
-
-
-
-/*
-  OUTPUT 
-Enter the first name
-Abc
-Enter the last Name
-Def
-Enter the Email ID 
-abcdef@gmail.com
-Enter the Mobile Number :
-91 9919819801
-Enter Password : 
-Cshj&9938
-User first Name is Valid 
-User last Name is Valid 
-User last Name is Valid
-User Mobile Number is Valid 
-Valid Password
- */
- 
